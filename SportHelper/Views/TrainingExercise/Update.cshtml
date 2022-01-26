@@ -1,0 +1,80 @@
+﻿@model Business.Interop.Data.TrainingExerciseDto
+
+@{ ViewData["Title"] = "Сет"; }
+
+<p><a style="font-size: 25px;" asp-controller="TrainingExercise" asp-action="Index">Назад</a></p>
+<br />
+
+<h2>Сет</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" value="@(Model is null ? 0 : Model.Id)" name="Id" />
+
+            <div class="form-group">
+                <label asp-for="TotalReps" class="control-label">Повторения, всего</label>
+
+                <input asp-for="TotalReps" class="form-control" maxlength="100" />
+
+                <span asp-validation-for="TotalReps" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Sets" class="control-label">Подходы</label>
+
+                <input asp-for="Sets" class="form-control" maxlength="100" />
+
+                <span asp-validation-for="Sets" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TotalMovedWeight" class="control-label">Общий тоннаж, кг</label>
+
+                <input asp-for="TotalMovedWeight" class="form-control" maxlength="100" type="number" step="any" />
+
+                <span asp-validation-for="TotalMovedWeight" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TotalDistance" class="control-label">Общая дистанция, м</label>
+
+                <input asp-for="TotalDistance" class="form-control" maxlength="100" type="number" step="any" />
+
+                <span asp-validation-for="TotalDistance" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SessionId" class="control-label">Тренировка</label>
+
+                <select asp-antiforgery="true" data-live-search="true" autocomplete="true" asp-for="SessionId" class="form-control" asp-items="ViewBag.SessionIds">
+                    <option selected="selected" value=""></option>
+                </select>
+
+                <span asp-validation-for="SessionId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ExerciseId" class="control-label">Упражнение</label>
+
+                <select asp-antiforgery="true" data-live-search="true" autocomplete="true" asp-for="ExerciseId" class="form-control" asp-items="ViewBag.ExerciseIds">
+                    <option selected="selected" value=""></option>
+                </select>
+
+                <span asp-validation-for="ExerciseId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn-outline-dark" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

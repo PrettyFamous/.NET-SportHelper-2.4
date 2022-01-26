@@ -1,0 +1,68 @@
+﻿@model Business.Interop.Data.UserDto
+
+@{ ViewData["Title"] = "Добавление пользователя"; }
+
+<p><a style="font-size: 25px;" asp-controller="User" asp-action="Index">Назад</a></p>
+<br />
+
+<h2>Пользователь</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" value="@(Model is null ? 0 : Model.Id)" name="Id" />
+
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label">ФИО</label>
+
+                <input asp-for="FullName" class="form-control" maxlength="100" />
+
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Birthdate" class="control-label">Дата рождения</label>
+
+                <input asp-for="Birthdate" class="form-control" maxlength="100" />
+
+                <span asp-validation-for="Birthdate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label">Масса тела, кг</label>
+
+                <input asp-for="Weight" class="form-control" maxlength="100" type="number" step="any" />
+
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Height" class="control-label">Рост, см</label>
+
+                <input asp-for="Height" class="form-control" maxlength="100" type="number" step="any" />
+
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Адрес электронной почты</label>
+
+                <input asp-for="Email" class="form-control" maxlength="100" />
+
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn-outline-dark" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

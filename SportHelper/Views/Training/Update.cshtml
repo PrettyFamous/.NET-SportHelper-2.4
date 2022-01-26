@@ -1,0 +1,54 @@
+﻿@model Business.Interop.Data.TrainingDto
+
+@{ ViewData["Title"] = "Тренировка"; }
+
+<p><a style="font-size: 25px;" asp-controller="Training" asp-action="Index">Назад</a></p>
+<br />
+
+<h2>Тренировка</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" value="@(Model is null ? 0 : Model.Id)" name="Id" />
+
+            <div class="form-group">
+                <label asp-for="Start" class="control-label">Начало</label>
+
+                <input asp-for="Start" class="form-control" maxlength="100" />
+
+                <span asp-validation-for="Start" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="End" class="control-label">Конец</label>
+
+                <input asp-for="End" class="form-control" maxlength="100" />
+
+                <span asp-validation-for="End" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label">Пользователь</label>
+
+                <select asp-antiforgery="true" data-live-search="true" autocomplete="true" asp-for="UserId" class="form-control" asp-items="ViewBag.UserIds">
+                    <option selected="selected" value=""></option>
+                </select>
+
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn-outline-dark" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

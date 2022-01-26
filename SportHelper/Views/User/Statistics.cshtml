@@ -1,0 +1,104 @@
+﻿@model SportHelper.Models.UserTimeRangeModel
+
+@{ ViewData["Title"] = "Статистика"; }
+
+<p><a style="font-size: 25px;" asp-controller="User" asp-action="Index">Назад</a></p>
+<br />
+
+<h2>Статистика</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="GetXlsxWithTrainings">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" value="@(Model is null ? 0 : Model.UserId)" name="UserId" />
+
+            <input type="hidden" value="@(Model is null ? 0 : Model.UserName)" name="UserName" />
+
+            <input type="hidden" value="@(Model is null ? 0 : Model.Email)" name="Email" />
+
+
+            <h4>Календарь тренировок:</h4>
+
+            <div style="margin-right: 10px"></div>
+
+            <div style="display: flex; flex-direction: row;">
+                <div class="form-group">
+                    <label asp-for="Start" class="control-label">Начало периода</label>
+
+                    <input asp-for="Start" class="form-control" maxlength="100" />
+
+                    <span asp-validation-for="Start" class="text-danger"></span>
+                </div>
+
+                <div style="margin-right: 10px"></div>
+
+                <div class="form-group">
+                    <label asp-for="End" class="control-label">Конец периода</label>
+
+                    <input asp-for="End" class="form-control" maxlength="100" />
+
+                    <span asp-validation-for="End" class="text-danger"></span>
+                </div>
+
+                <div style="margin-right: 10px"></div>
+
+                <div class="form-group" style="padding-top: 3%">
+                    <input type="submit" value="Скачать статистику" class="btn-outline-dark" />
+                </div>
+            </div>
+        </form>
+
+
+
+
+
+        <form asp-action="GetXlsxWithSleepSessions">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" value="@(Model is null ? 0 : Model.UserId)" name="UserId" />
+
+            <input type="hidden" value="@(Model is null ? 0 : Model.UserName)" name="UserName" />
+
+            <input type="hidden" value="@(Model is null ? 0 : Model.Email)" name="Email" />
+
+
+            <h4>Распорядок сна:</h4>
+
+            <div style="margin-right: 10px"></div>
+
+            <div style="display: flex; flex-direction: row;">
+                <div class="form-group">
+                    <label asp-for="Start" class="control-label">Начало периода</label>
+
+                    <input asp-for="Start" class="form-control" maxlength="100" />
+
+                    <span asp-validation-for="Start" class="text-danger"></span>
+                </div>
+
+                <div style="margin-right: 10px"></div>
+
+                <div class="form-group">
+                    <label asp-for="End" class="control-label">Конец периода</label>
+
+                    <input asp-for="End" class="form-control" maxlength="100" />
+
+                    <span asp-validation-for="End" class="text-danger"></span>
+                </div>
+
+                <div style="margin-right: 10px"></div>
+
+                <div class="form-group" style="padding-top: 3%">
+                    <input type="submit" value="Скачать статистику" class="btn-outline-dark" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

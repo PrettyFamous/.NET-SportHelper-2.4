@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Business.Interop.Data.NutritionDto>
+
+@{
+    ViewData["Title"] = "Приёмы пищи";
+}
+
+<p><a style="font-size: 25px;" asp-controller="Home" asp-action="Index">Главная</a></p>
+<br />
+
+<h2>Приёмы пищи</h2>
+<p><a style="font-size: 25px;" asp-controller="Nutrition" asp-action="Create">Добавить</a></p>
+<hr />
+
+<div class="container" style="border-radius: 5px">
+    <div class="row" style="border-radius: 3px">
+        <div class="col-3"><b>Пользователь</b></div>
+        <div class="col-3"><b>Время</b></div>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    <hr />
+
+    <div class="container" style="border-radius: 5px">
+        <div class="row" style="border-radius: 3px">
+            <div class="col-3">@item.User.FullName</div>
+            <div class="col-3">@item.Time</div>
+
+            <div class="col align-self-end">
+                <div align="right">
+                    <div class="btn-group">
+                        @Html.ActionLink("Подробнее", "Update", new { id = item.Id }, new { @style = "font-size: 20px;" })
+                        <div style="width: 20px;"></div>
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @style = "font-size: 20px;" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
